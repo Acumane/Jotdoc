@@ -1,0 +1,15 @@
+{
+  "name": "jotdoc",
+  "version": "1.0.0",
+  "description": "A more capable, legible Markdown",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+  },
+  "keywords": [],
+  "author": "",
+  "license": "GPL-3.0",
+  "dependencies": {
+    "@jotdoc/sup": "workspace:*"
+  }
+}

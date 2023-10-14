@@ -1,0 +1,15 @@
+lockfileVersion: '6.0'
+
+settings:
+  autoInstallPeers: true
+  excludeLinksFromLockfile: false
+
+importers:
+
+  .:
+    dependencies:
+      '@jotdoc/sup':
+        specifier: workspace:*
+        version: link:@jotdoc/sup
+
+  '@jotdoc/sup': {}
