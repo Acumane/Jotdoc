@@ -1,0 +1,42 @@
+{
+  "name": "jotdoc",
+  "displayName": "Jotdoc",
+  "description": "A more capable, legible Markdown",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.82.2"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [],
+  "main": "./extension.js",
+  "contributes": {
+    "markdown.markdownItPlugins": true,
+    "markdown.previewStyles": [
+      "./style.css"
+    ],
+    "commands": {
+      "command": "jotdoc.helloWorld",
+      "title": "Hello World"
+    }
+  },
+  "scripts": {
+    "lint": "eslint .",
+    "pretest": "pnpm run lint",
+    "test": "node ./test/runTest.js"
+  },
+  "devDependencies": {
+    "@types/mocha": "^10.0.2",
+    "@types/node": "~18.18.4",
+    "@types/vscode": "^1.83.0",
+    "@vscode/test-electron": "^2.3.5",
+    "eslint": "^8.51.0",
+    "glob": "^10.3.10",
+    "mocha": "^10.2.0",
+    "typescript": "^5.2.2"
+  },
+  "dependencies": {
+    "@jotdoc/sup": "workspace:*"
+  }
+}
