@@ -1,15 +1,18 @@
 {
   "name": "jotdoc",
-  "version": "1.0.0",
+  "version": "0.0.0",
   "description": "A more capable, legible Markdown",
+  "keywords": [
+    "markdown"
+  ],
+  "author": "",
+  "license": "GPL-3.0",
+
   "main": "index.js",
   "type": "module",
   "scripts": {
+    "pub": "publish --access=public",
+    "init": "init --scope=jotdoc && pnpm pkg set type='module'"
   },
-  "keywords": [],
-  "author": "",
-  "license": "GPL-3.0",
-  "dependencies": {
-    "@jotdoc/sup": "workspace:*"
-  }
+  "dependencies": {}
 }
