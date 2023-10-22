@@ -37,6 +37,7 @@
     "typescript": "^5.2.2"
   },
   "dependencies": {
-    "@jotdoc/sup": "workspace:*"
+    "@jotdoc/sup": "workspace:*",
+    "@jotdoc/sub": "workspace:*"
   }
 }

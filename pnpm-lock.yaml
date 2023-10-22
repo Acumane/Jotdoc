@@ -8,10 +8,15 @@ importers:
 
   .: {}
 
+  '@jotdoc/sub': {}
+
   '@jotdoc/sup': {}
 
   support/vscode:
     dependencies:
+      '@jotdoc/sub':
+        specifier: workspace:*
+        version: link:../../@jotdoc/sub
       '@jotdoc/sup':
         specifier: workspace:*
         version: link:../../@jotdoc/sup
