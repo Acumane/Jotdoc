@@ -1,0 +1,25 @@
+{
+  "name": "@jotdoc/align",
+  "version": "0.1.0",
+  "description": "",
+  "keywords": [
+    "markdown-it-plugin",
+    "markdown-it",
+    "markdown",
+    "jotdoc",
+    "align"
+  ],
+  "author": "",
+  "license": "GPL-3.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Acumane/jotdoc.git"
+  },
+
+  "main": "align.cjs",
+  "type": "module",
+  "scripts": {
+    "pub": "publish --access=public",
+    "init": "init --scope=jotdoc && pnpm pkg set type='module'"
+  }
+}

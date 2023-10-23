@@ -8,12 +8,17 @@ importers:
 
   .: {}
 
+  '@jotdoc/align': {}
+
   '@jotdoc/sub': {}
 
   '@jotdoc/sup': {}
 
   support/vscode:
     dependencies:
+      '@jotdoc/align':
+        specifier: workspace:*
+        version: link:../../@jotdoc/align
       '@jotdoc/sub':
         specifier: workspace:*
         version: link:../../@jotdoc/sub

@@ -5,6 +5,7 @@ function activate(context) {
 		extendMarkdownIt(md) {
 			return md.use(require('@jotdoc/sup'))
 					 .use(require('@jotdoc/sub'))
+					 .use(require('@jotdoc/align'))
 		}
 	}
 }
