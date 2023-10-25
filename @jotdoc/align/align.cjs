@@ -18,7 +18,6 @@ module.exports = function align_plugin(md) {
 
     while (state.pos < max) { // find closing '>' or '<'
       let cur = state.src.charCodeAt(state.pos)
-      console.log(cur)
       if (cur === 62) { break }
       if (cur === 60) { center = true; break }
 
