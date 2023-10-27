@@ -6,7 +6,7 @@ function activate(context) {
 			return md.use(require('@jotdoc/sup'))
 					 .use(require('@jotdoc/sub'))
 					 .use(require('@jotdoc/align'))
-					 .use(require('@jotdoc/replace'), {emdash: true})
+					 .use(require('@jotdoc/replace'), {mdash: true})
 		}
 	}
 }

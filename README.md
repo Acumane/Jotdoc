@@ -12,63 +12,66 @@ Markdown intends to make ease of **reading, writing, and editing prose**. Its ke
 HTML in Markdown deteriorates readability, yet a striking number of common use cases require it :thinking:
 </p>
 
-
 </div>
 	
 # Features
-> :warning: A collection of ideas cira early '23—subject to drastic change, k?
+> :warning: A collection of ideas circa '23—subject to drastic change, k?
 
-## Math
-Delimited by whitespace ( `·` for visibility)  
-If you want spaces in your terms, delimit w/ parenthesis
+## Basic
+If you want spaces in your terms, use parenthesis
+(`·` represents whitespace for visibility)
 
-### Exponents
-| Syntax       | Preview           |
-| :----------- | :---------------- |
+**Super/subscript:**
+| :----------: | :---------------: |
 | `x_i·`       | x<sub>i</sub>     |
 | `x^n+m·`     | x<sup>n+m</sup>   |
 | `x_(n·-·1)`  | x<sub>n -  1</sub>|
 
-### Simple fractions
-Numbers are formatted by default—no whitespace necessary
-| Syntax          | Preview                                       |
-| :--------------- | :------------------------------------------- |
-| `·N/A·`          | N/A                                          |
+**Simple fractions:**
+| :--------------: | :------------------------------------------: |
 | `·1/2·`          | <sup>1</sup>⁄<sub>2</sub>                    |
-| `·10·m·/·s·`     | 10<sup>m</sup>⁄<sub>s</sub>                  |
-| `(a·+·b^2)/(2b·/·3)` | <sup>a + b<sup>2</sup> </sup>⁄<sub> <sup>2b</sup>⁄<sub>3</sub></sub> |
+| `·N/A·`          | N/A                                          |
 
-💭 Use `%` instead?  
-Pragmatically, these needn't chain more than once; anything more complex is LaTeX territory.
+**Inline comments:**
 
-## Text markup `()`
-Use parenthesis to style anything in quotes  
-Pre- or postpend, doesn't matter. Argument order is also agnostic
+`% this` is > than `<!-- this shit -->`
 
-Colors:
+## Universal markup
+`[]()` works on text, images, and links! Arguments alone are how elements differentiate
 
-	(green)"This is green text" 
-	'—and this is red. Neat!'(r) 
+**Colors:**
 
-Links are also text:
-
-	"It's that easy"(center cyan scam.net)
-
-## Image markup `[]`
-Titles are optional:  
-💭 Image title: display as alt, title, figcaption? 
-
-	[.embed/idk.png 200px right]
-
-Common styles like `style="filter: invert(1);"` have their own arguments
-
-	'Figure #'[./fig#.png 400px invert grayscale]
-
-💭 Alternative to quotes on newlines:
-
-	Behold, cat: [../cat.png 60%]
+| :---: | :---: |
+| `[This is red text](red)` | <span style="color:red">This is red text</span> |
 	
-Use text markup `()` for clickable images
+
+> ⚙️ Pass custom named colors to options object
+
+**Links are really just text:**
+| :---: | :---: |
+| `[It's that easy!](scam.net green)` | <a href="scam.net" style="color:green">It's that easy!</a> |
+
+**Image sizes:**
+<table style="width: 100%">
+
+<tr>
+<td>
+
+`[Something](.embed/idk.png 100px)`
+
+</td><td > <!-- 2 -->
+
+<figure>
+	<img src=".embed/idk.jpg" alt="Elephant at sunset"  width="100px"/>
+</figure>
+
+</td>
+</tr>
+</table>
+
+> ⚙️ Image titles may be displayed as \<figcaptions>
+> 💭 `""` and `''` as substitutes for `[]`?
+⠀⠀Can't "link" to image paths. Does anyone care?
 
 ## Tables
 
@@ -85,6 +88,7 @@ Tables can be made exclusively with tabs ( `→` ):
 	1   →   →   List
 	2<  →   →   Image
 	3   →   →   Text
+
 </td><td > <!-- 2 -->
 
 | Count | Types |
@@ -103,8 +107,8 @@ When writing a paragraph to the side of a floated image, use `___` on a new line
 
 Use alone to prevent anything from wrapping into the space beside the image
 
-## Justification
-Justify **any** element (images, blocks, titles, etc...)  
+## Alignments
+Align **any** element (images, blocks, titles, etc...)  
 Save for images, `<h1>` titles, & inheritance, elements are left-justified by default
 
 <table style="width: 100%">
@@ -113,16 +117,26 @@ Save for images, `<h1>` titles, & inheritance, elements are left-justified by de
 
 	# Title<
 	## >Subtitle<
-	>Text
+	>Inline
+
+	>Lorem ipsum dolor sit amet, consectetur adipiscing
+	elit, sed do eiusmod tempor incididunt ut labore
+	et dolore magna aliqua.<
+
 </td><td>
 
   <h1>Title</h1>
   <h2 align="center">ㅤSubtitleㅤ</h2>
-  <p align="right">Text</p>
+  <p align="right">Inline</p>
+
+<p align="center">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
 
 </td>
 </tr>
 </table>
+
+> 💭 For inline left/right align: closing delimiter optional?
+⠀⠀Blocks: `>>>` on a new line?
 
 ## Columns
 Within a column block (`|||`):  
@@ -177,9 +191,3 @@ Now we're back to prose again
 </td>
 </tr>
 </table>
-
-## Misc
-
-- `-- Section --`: a small title centered within a horizontal divider
-- 💭 `% comments`, `// comments`, or `{comments}` are > than `<!-- this shit -->`
-- Single tilde strikethrough: `~strike~` to ~~strike~~
