@@ -22,56 +22,56 @@ If you want spaces in your terms, use parenthesis
 (`·` represents whitespace for visibility)
 
 **Super/subscript:**
-| :----------: | :---------------: |
 | `x_i·`       | x<sub>i</sub>     |
+| :----------: | :---------------: |
 | `x^n+m·`     | x<sup>n+m</sup>   |
 | `x_(n·-·1)`  | x<sub>n -  1</sub>|
 
 **Simple fractions:**
-| :--------------: | :------------------------------------------: |
 | `·1/2·`          | <sup>1</sup>⁄<sub>2</sub>                    |
+| :--------------: | :------------------------------------------: |
 | `·N/A·`          | N/A                                          |
 
 **Inline comments:**
 
 `% this` is > than `<!-- this shit -->`
 
+**Replacements:**   
+Compatible with the built-in typographer feature
+
+|  `...`  |  …  |
+| :-----: | :-: |
+|  `--`   |  —  |
+|  `->`   |  →  |
+
+> ⚙️ Specify your own replacement rules
+
 ## Universal markup
 `[]()` works on text, images, and links! Arguments alone are how elements differentiate
 
+
 **Colors:**
 
-| :---: | :---: |
-| `[This is red text](red)` | <span style="color:red">This is red text</span> |
-	
+	[This is red text](red)
 
-> ⚙️ Pass custom named colors to options object
+> ⚙️ Pass your own color names to options object
 
 **Links are really just text:**
-| :---: | :---: |
-| `[It's that easy!](scam.net green)` | <a href="scam.net" style="color:green">It's that easy!</a> |
+
+	[It's that easy!](scam.net green)
 
 **Image sizes:**
-<table style="width: 100%">
-
-<tr>
-<td>
+<table style="width: 100%"><tr><td>
 
 `[Something](.embed/idk.png 100px)`
 
 </td><td > <!-- 2 -->
+<img src=".embed/idk.jpg" width="100px"/>
+</td></tr></table>
 
-<figure>
-	<img src=".embed/idk.jpg" alt="Elephant at sunset"  width="100px"/>
-</figure>
-
-</td>
-</tr>
-</table>
-
-> ⚙️ Image titles may be displayed as \<figcaptions>
-> 💭 `""` and `''` as substitutes for `[]`?
-⠀⠀Can't "link" to image paths. Does anyone care?
+> ⚙️ Image titles may be displayed as \<figcaptions>   
+> 💭 `""` and `''` as substitutes for `[]`?   
+>⠀⠀Can't "link" to image paths. Does anyone care?
 
 ## Tables
 
@@ -135,8 +135,8 @@ Save for images, `<h1>` titles, & inheritance, elements are left-justified by de
 </tr>
 </table>
 
-> 💭 For inline left/right align: closing delimiter optional?
-⠀⠀Blocks: `>>>` on a new line?
+> 💭 For inline left/right align: closing delimiter optional?   
+>⠀⠀Blocks: `>>>` on a new line?
 
 ## Columns
 Within a column block (`|||`):  
@@ -157,6 +157,7 @@ Here's column #2
 And here's the third
 :vulcan_salute:
 |||
+
 Now we're back to prose again
 ```
   
