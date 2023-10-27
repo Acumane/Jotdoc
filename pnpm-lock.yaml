@@ -10,6 +10,8 @@ importers:
 
   '@jotdoc/align': {}
 
+  '@jotdoc/replace': {}
+
   '@jotdoc/sub': {}
 
   '@jotdoc/sup': {}
@@ -19,6 +21,9 @@ importers:
       '@jotdoc/align':
         specifier: workspace:*
         version: link:../../@jotdoc/align
+      '@jotdoc/replace':
+        specifier: workspace:*
+        version: link:../../@jotdoc/replace
       '@jotdoc/sub':
         specifier: workspace:*
         version: link:../../@jotdoc/sub

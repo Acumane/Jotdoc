@@ -53,6 +53,7 @@
   "dependencies": {
     "@jotdoc/sup": "workspace:*",
     "@jotdoc/sub": "workspace:*",
-    "@jotdoc/align": "workspace:*"
+    "@jotdoc/align": "workspace:*",
+    "@jotdoc/replace": "workspace:*"
   }
 }
