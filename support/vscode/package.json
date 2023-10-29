@@ -42,6 +42,11 @@
           "type": "string",
           "default": "",
           "description": "Comma + space-sepearted string of replace rules you'd like to disable"
+        },
+        "jotdoc.replace.customRules": {
+          "type": "array",
+          "default": [],
+          "description": "Specify object w/ a (name), regex pattern (re), and replacement (sub)"
         }
       }
     },

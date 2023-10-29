@@ -1,4 +1,4 @@
-const replacements = [
+let res = [
   {
     name: 'plusminus',
     re: /\+-/g,
@@ -61,9 +61,9 @@ module.exports = (md, options) => {
 				}
 
 				if (token.type === 'text' && !insideLink) {
-          for (const rep of replacements) {
-            if (options[rep.name] !== undefined ? options[rep.name] : rep.default) {
-              token.content = token.content.replace(rep.re, rep.sub)
+          for (const r of res) {
+            if (options[r.name] !== undefined ? options[r.name] : r.default) {
+              token.content = token.content.replace(r.re, r.sub)
             }
           }
 				}
@@ -72,4 +72,4 @@ module.exports = (md, options) => {
 	})
 }
 
-module.exports.replacements = replacements
+module.exports.res = res
