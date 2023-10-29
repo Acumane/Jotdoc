@@ -1,32 +1,13 @@
-const vscode = require('vscode'); // extension API
-let conf = vscode.workspace.getConfiguration('jotdoc')
+const { enabledFeatures, confChange } = require('./config.js')
 
-let disabledFeatures = conf.get('disabledFeatures').split(', ')
-let reDisabledRules = conf.get('replace.disabledRules').split(', ')
+function activate(context) {
 
-function reOptions() {
-	let options = {}
-	for (let d of reDisabledRules)
-		options[d] = false
-	console.log(options)
-	return options
-}
-
-const features = {
-	'@jotdoc/sup': {},
-	'@jotdoc/sub': {},
-	'@jotdoc/align': {},
-	'@jotdoc/replace': reOptions(),
-}
-
-function activate(context) { // 
-	console.warn(disabledFeatures)
-	console.warn(reDisabledRules)
+	context.subscriptions.push(confChange)
 
 	return {
 		extendMarkdownIt(md) {
-			for (const f of Object.keys(features)) 
-				md.use(require(f), features[f])
+			for (const f of enabledFeatures) 
+				md.use(require(`@jotdoc/${f[0]}`), f[1])
 			return md
 		}
 	}
