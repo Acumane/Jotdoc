@@ -30,6 +30,21 @@
         "configuration": "./lang-conf.json"
       }
     ],
+    "configuration": {
+      "title": "Jotdoc",
+      "properties": {
+        "jotdoc.disabledFeatures": {
+          "type": "string",
+          "default": "",
+          "description": "Comma + space-sepearted string of features you'd like to disable\n(Restart required)"
+        },
+        "jotdoc.replace.disabledRules": {
+          "type": "string",
+          "default": "",
+          "description": "Comma + space-sepearted string of replace rules you'd like to disable"
+        }
+      }
+    },
     "commands": {
       "command": "jotdoc.helloWorld",
       "title": "Hello World"

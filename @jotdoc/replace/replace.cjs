@@ -1,10 +1,9 @@
-
 const replacements = [
   {
     name: 'plusminus',
     re: /\+-/g,
     sub: '\u00b1',
-    default: false
+    default: true
   },
   {
     name: 'ellipsis',
@@ -40,7 +39,7 @@ const replacements = [
     name: 'mdash',
     re: /(^|[^-])--([^-]|$)/mg,
     sub: '$1\u2014$2',
-    default: false
+    default: true
   }
 ]
 
