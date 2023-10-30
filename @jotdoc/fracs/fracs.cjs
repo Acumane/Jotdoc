@@ -11,34 +11,34 @@ module.exports = (md) => {
 
             let parts = token.content.split(' ') // split the token up
             let newTokens = [] // what we're replacing the current token with
+            let fracless = [] // text fragments that aren't fractions
 
             parts.forEach((part, i) => {
-                if (isFraction(part)) {
+                if(isFraction(part)) {
+                    if(fracless.length) { // end of fracless fragment; convert to text token
+                        let text = new state.Token('text', '', 0)
+                        text.content = fracless.join(' ')
+                        newTokens.push(text)
+                        fracless = [] // reset
+                    }
                     let [num, den] = part.split('/')
-
+                    
                     let sup = new state.Token('html_inline', '', 0)
-                    sup.content = `<sup>${num}</sup>⁄`
-
+                    sup.content = ` <sup>${num}</sup>⁄`
+                    
                     let sub = new state.Token('html_inline', '', 0)
-                    sub.content = `<sub>${den}</sub>`
-
+                    sub.content = `<sub>${den}</sub> `
+                    
                     newTokens.push(sup, sub)
-                } else {
-                    // If it's not a fraction, leave untouched
-                    let textToken = new state.Token('text', '', 0)
-                    textToken.content = part
-                    newTokens.push(textToken)
-                    // TODO: performance
                 }
-
-                // Add spaces again (except after final 'part')
-                if (i < parts.length - 1) {
-                    let space = new state.Token('text', '', 0)
-                    space.content = ' '
-                    newTokens.push(space)
+                else fracless.push(part)
+        
+                if(i === parts.length - 1 && fracless.length) {
+                    let text = new state.Token('text', '', 0)
+                    text.content = fracless.join(' ') // trailing fracless text
+                    newTokens.push(text)
                 }
             })
-
             return newTokens
         }
 
