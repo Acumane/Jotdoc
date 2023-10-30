@@ -10,6 +10,8 @@ importers:
 
   '@jotdoc/align': {}
 
+  '@jotdoc/comments': {}
+
   '@jotdoc/fracs': {}
 
   '@jotdoc/replace': {}
@@ -23,6 +25,9 @@ importers:
       '@jotdoc/align':
         specifier: workspace:*
         version: link:../../@jotdoc/align
+      '@jotdoc/comments':
+        specifier: workspace:*
+        version: link:../../@jotdoc/comments
       '@jotdoc/fracs':
         specifier: workspace:*
         version: link:../../@jotdoc/fracs

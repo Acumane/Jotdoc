@@ -75,6 +75,7 @@
     "@jotdoc/sub": "workspace:*",
     "@jotdoc/align": "workspace:*",
     "@jotdoc/replace": "workspace:*",
-    "@jotdoc/fracs": "workspace:*"
+    "@jotdoc/fracs": "workspace:*",
+    "@jotdoc/comments": "workspace:*"
   }
 }

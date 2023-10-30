@@ -50,7 +50,8 @@ let features = [
 	['sub', {} ],
 	['align', {} ],
 	['replace', replaceOpts() ],
-	['fracs', {} ]
+	['fracs', {} ],
+	['comments', {} ]
 ]
 featureCheck()
 
