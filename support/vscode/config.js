@@ -3,13 +3,15 @@ let replace = require('@jotdoc/replace')
 
 let config = {}
 
+const core = [ // requires restart
+	'disabledFeatures',
+	'replace.disabledRules',
+	'replace.customRules'
+]
+
 const disable = [
 	'disabledFeatures',
 	'replace.disabledRules',
-]
-
-const settings = [
-	'replace.customRules'
 ]
 
 let root = vscode.workspace.getConfiguration('jotdoc')
@@ -22,8 +24,10 @@ function customRuleCheck() {
 			let valid = true
 			if (rule && rule.name && rule.re && rule.sub){ 
 				try {
-					let [, regex, flags] = rule.re.split('/')
-					replace.res.push({name: rule.name, re: new RegExp(regex, flags), sub: rule.sub, default: true})
+					let pattern = rule.re.slice(1, rule.re.lastIndexOf('/'))
+					let flags = rule.re.slice(rule.re.lastIndexOf('/') + 1)
+					// if (replace.res.some( re => re.name === rule.name))
+					replace.res.push({name: rule.name, re: new RegExp(pattern, flags), sub: rule.sub, default: true})
 				}
 				catch(e) { valid = false }
 			}
@@ -64,7 +68,7 @@ function featureCheck() {
 }
 
 let confChange = vscode.workspace.onDidChangeConfiguration((event) => {
-	if (disable.some(setting => event.affectsConfiguration(`jotdoc.${setting}`))) {
+	if (core.some(setting => event.affectsConfiguration(`jotdoc.${setting}`))) {
 		vscode.window.showInformationMessage('Code must reload to reflect changes.', 'Reload')
 		.then(selection => { if (selection === 'Reload')
 			vscode.commands.executeCommand("workbench.action.reloadWindow")
@@ -72,13 +76,8 @@ let confChange = vscode.workspace.onDidChangeConfiguration((event) => {
 
 		let root = vscode.workspace.getConfiguration('jotdoc')
 		disable.forEach(setting => config[setting] = root.get(setting).split(', ').filter(Boolean))
-		replaceOpts(); featureCheck()
-	}
-	if (settings.some(setting => event.affectsConfiguration(`jotdoc.${setting}`))) {
-		let root = vscode.workspace.getConfiguration('jotdoc')
 		customRules = root.get('replace.customRules')
-		vscode.window.showInformationMessage('Option changedd')
-		customRuleCheck()
+		replaceOpts(); featureCheck(); customRuleCheck()
 	}
 })
 
