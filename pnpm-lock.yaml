@@ -10,6 +10,8 @@ importers:
 
   '@jotdoc/align': {}
 
+  '@jotdoc/fracs': {}
+
   '@jotdoc/replace': {}
 
   '@jotdoc/sub': {}
@@ -21,6 +23,9 @@ importers:
       '@jotdoc/align':
         specifier: workspace:*
         version: link:../../@jotdoc/align
+      '@jotdoc/fracs':
+        specifier: workspace:*
+        version: link:../../@jotdoc/fracs
       '@jotdoc/replace':
         specifier: workspace:*
         version: link:../../@jotdoc/replace
