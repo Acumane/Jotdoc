@@ -16,18 +16,17 @@
     "markdown-it"
   ],
   "activationEvents": [],
-  "main": "./extension.js",
+  "main": "./src/extension.js",
   "contributes": {
     "markdown.markdownItPlugins": true,
     "markdown.previewStyles": [
-      "./style.css"
+      "./src/style.css"
     ],
     "languages": [
       {
         "id": "markdown",
         "extensions": [ ".md" ],
-        "aliases": [ "md", "Markdown" ],
-        "configuration": "./lang-conf.json"
+        "configuration": "./src/lang-conf.json"
       }
     ],
     "configuration": {

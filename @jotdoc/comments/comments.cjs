@@ -1,4 +1,4 @@
-let RE = /^\% .*/   // lines starting with '% '
+let RE = /^\%.*/   // lines starting with '% '
 
 module.exports = (md) => {
   md.core.ruler.push('comments', (state) => {
