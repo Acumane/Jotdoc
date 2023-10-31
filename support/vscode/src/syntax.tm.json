@@ -1,0 +1,29 @@
+{
+	"scopeName": "jotdoc.inject",
+	"injectionSelector": "L:text.html.markdown",
+	"patterns": [
+		{ "include": "#comment" },
+		{ "include": "#center" }
+	],
+	"repository": {
+		"comment": {
+			"name": "comment.block.html",
+			"begin": "(?<=^\\s*)%",
+			"captures": {
+				"0": {"name": "punctuation.definition.comment.html"}
+			},
+			"while": "(^|\\G)(?!\\s*$)"
+		},
+
+		"center": {
+			"begin": "(?<=^\\s*)>(?!\\s)",
+			"beginCaptures": {
+				"0": {"name": "markup.heading.align.open.markdown"}
+			},
+			"end": "(?<!\\s)<(?=\\s*$)",
+			"endCaptures": {
+				"0": {"name": "markup.heading.align.close.markdown"}
+			}
+		}
+	}
+}

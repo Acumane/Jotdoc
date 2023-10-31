@@ -29,6 +29,13 @@
         "configuration": "./src/lang-conf.json"
       }
     ],
+    "grammars": [
+      {
+        "scopeName": "jotdoc.inject",
+        "injectTo": ["text.html.markdown"],
+        "path": "./src/syntax.tm.json"
+      }
+    ],
     "configuration": {
       "title": "Jotdoc",
       "properties": {
