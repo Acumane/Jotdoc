@@ -1,8 +1,9 @@
 <div align="center"> 
 
-# 📜 **Jotdoc**
+<img src=".embed/jd-.png" width="125px"/>
 
-<center>A more capable, legible Markdown</center>
+<span style="font-size: 30px; font-weight:bold">Jotdoc</span>
+<span>A more capable, legible Markdown</span>
 
 ## Motivation
 
@@ -14,25 +15,25 @@ HTML in Markdown deteriorates readability, yet a striking number of common use c
 
 </div>
 	
-# Features
+# <img src=".embed/jd+.png" width="38px"/> Features
 > :warning: A collection of ideas circa '23—subject to drastic change, k?
 
 ## Basic
-If you want spaces in your terms, use parenthesis
+The option to close with whitespace. If you want spaces in your terms, use parenthesis
 (`·` represents whitespace for visibility)
 
 **Super/subscript:**
-| `x_i·`       | x<sub>i</sub>     |
-| :----------: | :---------------: |
-| `x^n+m·`     | x<sup>n+m</sup>   |
-| `x_(n·-·1)`  | x<sub>n -  1</sub>|
+| `x^n+m·` or `x^n+m^` |  x<sup>n+m</sup>   |
+| :-----------------: | :----------------: |
+|  `x_i·` or `x_i_`   |   x<sub>i</sub>    |
+|     `x_(n·-·1)`     | x<sub>n -  1</sub> |
 
-**Simple fractions:**
-| `·1/2·`          | <sup>1</sup>⁄<sub>2</sub>                    |
-| :--------------: | :------------------------------------------: |
-| `·N/A·`          | N/A                                          |
+**Simple fractions:**   
+Up to 2 digits in the numerator/denominator
+| `·1/16·` | <sup>1</sup>⁄<sub>16</sub> |
+| :------: | :-----------------------: |
 
-**Inline comments:**
+**Block comments:**
 
 `% this` is > than `<!-- this shit -->`
 
@@ -65,7 +66,7 @@ Compatible with the built-in typographer feature
 
 `[Something](.embed/idk.png 100px)`
 
-</td><td > <!-- 2 -->
+</td><td >
 <img src=".embed/idk.jpg" width="100px"/>
 </td></tr></table>
 
@@ -73,43 +74,67 @@ Compatible with the built-in typographer feature
 > 💭 `""` and `''` as substitutes for `[]`?   
 >⠀⠀Can't "link" to image paths. Does anyone care?
 
-## Tables
+## Multiline columns & tables
 
-Tables can be made exclusively with tabs ( `→` ):
-- `:` denotes a title; default justification is left
-- Justification is inherited, but each line may specify its own
+> 💭 Considering `|:`, `|_` for header definition
+⠀⠀`=`* or `-`* under text no longer makes them headers. Good riddance.
+
+Alignment is inherited, but each line may specify its own
+
+Headers (`|=`) are optional, as are additional rows; the following is recognized as just columns and styled accordingly:
 
 <table style="width: 100%">
-
 <tr>
 <td>
 
-	>Count:	→	Types:
-	1   →   →   List
-	2<  →   →   Image
-	3   →   →   Text
+```
+===
+| This is the first column
+:point_up:
+| Here's column #2
+:v:
+| And here's the third
+:vulcan_salute:
+===
 
-</td><td > <!-- 2 -->
+Now we're back to prose again
+```
+  
+</td><td>
 
-| Count | Types |
-| ----: | :---- |
-| 1     | List  |
-| 2⠀⠀⠀  | Image |
-| 3     | Text  |
+<table style="width: 100%">
+<tr style="border: none;">
+<td style="border: none; border-right: solid 1px #ccc">
+
+This is the first column
+
+:point_up:
+
+</td><td style="border: none; border-right: solid 1px #ccc">
+
+Here's column #2
+
+:v:
+
+</td><td style="border: none;">
+
+And here's the third
+
+:vulcan_salute:
 
 </td>
 </tr>
 </table>
 
-## Wrap break (`___`)
-<!-- <br style="clear:both"/> -->
-When writing a paragraph to the side of a floated image, use `___` on a new line to begin your next paragraph right below it.
+Now we're back to prose again
 
-Use alone to prevent anything from wrapping into the space beside the image
+</td>
+</tr>
+</table>
 
 ## Alignments
 Align **any** element (images, blocks, titles, etc...)  
-Save for images, `<h1>` titles, & inheritance, elements are left-justified by default
+Save for images, `<h1>` titles, & inheritance, elements are left-aligned by default
 
 <table style="width: 100%">
 <tr>
@@ -136,59 +161,11 @@ Save for images, `<h1>` titles, & inheritance, elements are left-justified by de
 </table>
 
 > 💭 For inline left/right align: closing delimiter optional?   
->⠀⠀Blocks: `>>>` on a new line?
 
-## Columns
-Within a column block (`|||`):  
-Break and begin at the top of new column with `^^^` 
+## Wrap break (`___`)
+<!-- <br style="clear:both"/> -->
+When writing a paragraph to the side of a floated image, use `___` on a new line to begin your next paragraph right below it.
 
-<table style="width: 100%">
-<tr>
-<td>
+Use alone to prevent anything from wrapping into the space beside the image
 
-```
-|||
-This is the first column
-:point_up:
-^^^
-Here's column #2
-:v:
-^^^
-And here's the third
-:vulcan_salute:
-|||
-
-Now we're back to prose again
-```
-  
-</td><td > <!-- 1 -->
-
-<table style="width: 100%">
-<tr>
-<td>
-
-This is the first column
-
-:point_up:
-
-</td><td > <!-- 2 -->
-
-Here's column #2
-
-:v:
-
-</td><td > <!-- 3 -->
-
-And here's the third
-
-:vulcan_salute:
-
-</td>
-</tr>
-</table>
-
-Now we're back to prose again
-
-</td>
-</tr>
-</table>
+> 💭 or `^^^`
