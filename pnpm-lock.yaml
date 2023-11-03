@@ -20,6 +20,8 @@ importers:
 
   '@jotdoc/sup': {}
 
+  '@jotdoc/unify': {}
+
   support/vscode:
     dependencies:
       '@jotdoc/align':
@@ -40,6 +42,9 @@ importers:
       '@jotdoc/sup':
         specifier: workspace:*
         version: link:../../@jotdoc/sup
+      '@jotdoc/unify':
+        specifier: workspace:*
+        version: link:../../@jotdoc/unify
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.2
