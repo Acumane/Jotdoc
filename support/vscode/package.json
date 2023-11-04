@@ -49,10 +49,15 @@
           "default": "",
           "description": "Comma + space-sepearted string of replace rules you'd like to disable"
         },
-        "jotdoc.replace.customRules": {
+        "jotdoc.replace.userRules": {
           "type": "array",
           "default": [],
           "description": "Specify object w/ a (name), regex pattern (re), and replacement (sub)"
+        },
+        "jotdoc.unify.userColors": {
+          "type": "array",
+          "default": [],
+          "description": "Specify object w/ a (name) and hex code (color)"
         }
       }
     },
@@ -77,12 +82,13 @@
     "typescript": "^5.2.2"
   },
   "dependencies": {
-    "@jotdoc/sup": "workspace:*",
-    "@jotdoc/sub": "workspace:*",
     "@jotdoc/align": "workspace:*",
-    "@jotdoc/replace": "workspace:*",
-    "@jotdoc/fracs": "workspace:*",
     "@jotdoc/comments": "workspace:*",
-    "@jotdoc/unify": "workspace:*"
+    "@jotdoc/fracs": "workspace:*",
+    "@jotdoc/replace": "workspace:*",
+    "@jotdoc/sub": "workspace:*",
+    "@jotdoc/sup": "workspace:*",
+    "@jotdoc/unify": "workspace:*",
+    "tinycolor2": "^1.6.0"
   }
 }

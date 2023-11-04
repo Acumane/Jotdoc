@@ -1,12 +1,15 @@
 const vscode = require('vscode'); // extension API
 let replace = require('@jotdoc/replace')
+let unify = require('@jotdoc/unify')
+let Color = require("tinycolor2");
 
 let config = {}
 
 const core = [ // requires restart
 	'disabledFeatures',
 	'replace.disabledRules',
-	'replace.customRules'
+	'replace.userRules',
+	'unify.userColors'
 ]
 
 const disable = [
@@ -16,11 +19,12 @@ const disable = [
 
 let root = vscode.workspace.getConfiguration('jotdoc')
 disable.forEach(setting => config[setting] = root.get(setting).split(', ').filter(Boolean))
-let customRules = root.get('replace.customRules')
+let userRules = root.get('replace.userRules')
+let userColors = root.get('unify.userColors')
 
-function customRuleCheck() {
-	if (customRules.length) { // custom rules provided
-		customRules.forEach(rule => {
+function userRuleCheck() {
+	if (userRules.length) { // custom rules provided
+		userRules.forEach(rule => {
 			let valid = true
 			if (rule && rule.name && rule.re && rule.sub){ 
 				try {
@@ -36,9 +40,26 @@ function customRuleCheck() {
 		})
 	}
 }
-customRuleCheck()
+userRuleCheck()
 
-function replaceOpts() { // + check
+function userColorCheck() {
+	if (userColors.length) { // colors provided
+		userColors.forEach(c => {
+			let valid = true
+			if (c && c.name && c.color){ 
+				if (Color(c.color).isValid()) 
+					unify.userColor.push({name: c.name, color: c.color})
+				else valid = false 
+			}
+			else valid = false
+			if (!valid) vscode.window.showWarningMessage(`Custom color "${c.name}" is malformed!`)
+		})
+	}
+
+}
+userColorCheck()
+
+function reDisabled() { // + check
 	let object = {}
 	config['replace.disabledRules'].forEach( rule => {
 		if (replace.res.some( re => re.name === rule))
@@ -53,7 +74,7 @@ let features = [
 	['sup', {} ],
 	['sub', {} ],
 	['align', {} ],
-	['replace', replaceOpts() ],
+	['replace', reDisabled() ],
 	['fracs', {} ],
 	['comments', {} ],
 	['unify', {} ]
@@ -77,8 +98,9 @@ let confChange = vscode.workspace.onDidChangeConfiguration((event) => {
 
 		let root = vscode.workspace.getConfiguration('jotdoc')
 		disable.forEach(setting => config[setting] = root.get(setting).split(', ').filter(Boolean))
-		customRules = root.get('replace.customRules')
-		replaceOpts(); featureCheck(); customRuleCheck()
+		userRules = root.get('replace.userRules')
+		userColors = root.get('unify.userColors')
+		reDisabled(); featureCheck(); userRuleCheck(); userColorCheck()
 	}
 })
 
@@ -87,5 +109,6 @@ let enabledFeatures = features.filter(f => !config['disabledFeatures'].includes(
 module.exports = {
 	enabledFeatures,
 	confChange,
-	replace
+	replace,
+	unify
 }

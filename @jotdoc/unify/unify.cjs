@@ -1,9 +1,11 @@
+let Color = require("tinycolor2")
+
 'use strict'
 
-const COLOR  = /^(red|orange|yellow|green|blue|purple)$/i,
-      WIDTH = /^\d+(?:px|%)?$/i,
-      DIM = /^\d+x\d+(?:px)?$/i
+let userColor = []
 
+const WIDTH = /^\d+(?:px|%)?$/i,
+      DIM = /^\d+x\d+(?:px)?$/i
 
 function classify(path) {
   try {
@@ -11,7 +13,9 @@ function classify(path) {
     return 'link'
   }
   catch(e){
-    if (COLOR.test(path)) return 'color'
+    if (Color(path).isValid()) return 'color'
+    const match = userColor.find((c) => c.name === path)
+    if (match) return 'ucolor'
     return 'image'
   }
 }
@@ -20,17 +24,11 @@ module.exports = (md) => {
   md.inline.ruler.disable(['image', 'link']) // replace with:
   md.inline.ruler.push('unify', (state, silent) => {
 
-    let attrs,
-        args,
-        path,
-        attr,
-        type,
+    let attrs, attr,
+        args, path = '',
+        cEnd, found, content,
+        type, token, nested,
         pos,
-        cEnd,
-        nested,
-        token,
-        found,
-        content,
         start = state.pos,
         max = state.posMax
 
@@ -92,9 +90,11 @@ module.exports = (md) => {
             attrs.push(['width', attr.split('x')[0]], ['height', attr.split('x')[1]])
           break
 
+        case 'ucolor':
         case 'color':
+          const color = (type === 'ucolor') ? userColor.find((c) => c.name === path).color : path
           token         = state.push('span_open', 'span', 1)
-          token.attrs   = [ [ 'style', `color:${path}` ] ]
+          token.attrs   = [ [ 'style', `color:${color}` ] ]
           token         = state.push('text', '', 0)
           token.content = content 
           token         = state.push('span_close', 'span', -1)
@@ -107,3 +107,5 @@ module.exports = (md) => {
   
   })
 }
+
+module.exports.userColor = userColor
