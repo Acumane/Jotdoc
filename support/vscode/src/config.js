@@ -1,30 +1,26 @@
-const vscode = require('vscode'); // extension API
-let replace = require('@jotdoc/replace')
-let unify = require('@jotdoc/unify')
-let Color = require("tinycolor2");
+const vscode = require('vscode') // extension API
+const Color = require("tinycolor2")
+const replace = require('@jotdoc/replace'),
+	  unify = require('@jotdoc/unify')
 
-let config = {}
+const CONF = {
+	'disabledFeatures':      null,
+	'replace.disabledRules': null,
+	'replace.userRules':     null,
+	'unify.userColors':      null
+}
 
-const core = [ // requires restart
-	'disabledFeatures',
-	'replace.disabledRules',
-	'replace.userRules',
-	'unify.userColors'
-]
-
-const disable = [
-	'disabledFeatures',
-	'replace.disabledRules',
-]
-
-let root = vscode.workspace.getConfiguration('jotdoc')
-disable.forEach(setting => config[setting] = root.get(setting).split(', ').filter(Boolean))
-let userRules = root.get('replace.userRules')
-let userColors = root.get('unify.userColors')
+function loadConf() {
+	let ROOT = vscode.workspace.getConfiguration('jotdoc')
+	for (const c in CONF) {
+		let val = ROOT.get(c)
+		CONF[c] = c.includes('disabled') ? val.split(', ').filter(Boolean) : val
+	}
+}; loadConf()
 
 function userRuleCheck() {
-	if (userRules.length) { // custom rules provided
-		userRules.forEach(rule => {
+	if (CONF['replace.userRules'].length) { // custom rules provided
+		CONF['replace.userRules'].forEach(rule => {
 			let valid = true
 			if (rule && rule.name && rule.re && rule.sub){ 
 				try {
@@ -39,12 +35,11 @@ function userRuleCheck() {
 			if (!valid) vscode.window.showWarningMessage(`Custom rule "${rule.name}" is malformed!`)
 		})
 	}
-}
-userRuleCheck()
+}; userRuleCheck()
 
 function userColorCheck() {
-	if (userColors.length) { // colors provided
-		userColors.forEach(c => {
+	if (CONF['unify.userColors'].length) { // colors provided
+		CONF['unify.userColors'].forEach(c => {
 			let valid = true
 			if (c && c.name && c.color){ 
 				if (Color(c.color).isValid()) 
@@ -56,59 +51,51 @@ function userColorCheck() {
 		})
 	}
 
-}
-userColorCheck()
+}; userColorCheck()
 
-function reDisabled() { // + check
+function reOpts() { // + check
 	let object = {}
-	config['replace.disabledRules'].forEach( rule => {
+	CONF['replace.disabledRules'].forEach( rule => {
 		if (replace.res.some( re => re.name === rule))
 			object[rule] = false;
 		else
-			vscode.window.showWarningMessage(`Rule "${rule}" is not defined!`)
+			vscode.window.showWarningMessage(`Rule "${rule}" does not exist!`)
 	})
 	return object
 }
 
 let features = [
-	['sup', {} ],
-	['sub', {} ],
-	['align', {} ],
-	['replace', reDisabled() ],
-	['fracs', {} ],
-	['comments', {} ],
-	['unify', {} ]
+	['sup', {}, null ],
+	['sub', {}, null ],
+	['align', {}, null ],
+	['replace', reOpts(), replace ],
+	['fracs', {}, null ],
+	['comments', {}, null ],
+	['unify', {}, unify ]
 ]
-featureCheck()
-
 
 function featureCheck() {
-	config['disabledFeatures'].forEach(i => {
+	CONF['disabledFeatures'].forEach(i => {
 		if (!features.some(j => i === j[0]))
 			vscode.window.showWarningMessage(`Feature "${i}" does not exist!`)
 	})
-}
+}; featureCheck()
 
 let confChange = vscode.workspace.onDidChangeConfiguration((event) => {
-	if (core.some(setting => event.affectsConfiguration(`jotdoc.${setting}`))) {
+	if (Object.keys(CONF).some(setting => event.affectsConfiguration(`jotdoc.${setting}`))) {
 		vscode.window.showInformationMessage('Code must reload to reflect changes.', 'Reload')
 		.then(selection => { if (selection === 'Reload')
 			vscode.commands.executeCommand("workbench.action.reloadWindow")
 		})
 
-		let root = vscode.workspace.getConfiguration('jotdoc')
-		disable.forEach(setting => config[setting] = root.get(setting).split(', ').filter(Boolean))
-		userRules = root.get('replace.userRules')
-		userColors = root.get('unify.userColors')
-		reDisabled(); featureCheck(); userRuleCheck(); userColorCheck()
+		loadConf()
+		reOpts(); featureCheck(); userRuleCheck(); userColorCheck()
 	}
 })
 
-let enabledFeatures = features.filter(f => !config['disabledFeatures'].includes(f[0]))
+let enabledFeatures = features.filter(f => !CONF['disabledFeatures'].includes(f[0]))
 
 module.exports = {
 	enabledFeatures,
-	confChange,
-	replace,
-	unify
+	confChange
 }
