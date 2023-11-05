@@ -3,26 +3,41 @@
 	"injectionSelector": "L:text.html.markdown",
 	"patterns": [
 		{ "include": "#comment" },
-		{ "include": "#center" }
+		{ "include": "#center" },
+		{ "include": "#unify" }
 	],
 	"repository": {
 		"comment": {
 			"name": "comment.block.html",
-			"begin": "(?<=^\\s*)%",
-			"captures": {
-				"0": {"name": "punctuation.definition.comment.html"}
+			"begin": "^\\s*(%)(.*)",
+			"beginCaptures": {
+				"1": {"name": "punctuation.definition.comment.html"},
+				"2": {"name": "comment.block.html"}
+
 			},
 			"while": "(^|\\G)(?!\\s*$)"
 		},
 
 		"center": {
-			"begin": "(?<=^\\s*)>(?!\\s)",
+			"begin": "^\\s*(>)\\S",
 			"beginCaptures": {
-				"0": {"name": "markup.heading.align.open.markdown"}
+				"1": {"name": "markup.heading.align.open.markdown"}
 			},
-			"end": "(?<!\\s)<(?=\\s*$)",
+			"end": "\\S(<)\\s*$",
 			"endCaptures": {
-				"0": {"name": "markup.heading.align.close.markdown"}
+				"1": {"name": "markup.heading.align.close.markdown"}
+			}
+		},
+		"unify": {
+			"match": "(\\[)((?<square>[^\\[\\]\\\\]|\\[\\g<square>*+\\])*+)(\\])(\\()\\s*(?:(\\S*[\\/\\.]\\S*)\\s*)?([^)\\s]+)?.*?(\\))",
+			"captures": {
+				"1": { "name": "punctuation.definition.link.title.begin.markdown" },
+				"2": { "name": "string.other.link.description.markdown" },
+				"4": { "name": "punctuation.definition.link.title.end.markdown" },
+				"5": { "name": "punctuation.definition.metadata.markdown" },
+				"6": { "name": "markup.underline.link.image.markdown" },
+				"7": { "name": "entity.other.attribute-name" },
+				"8": { "name": "punctuation.definition.metadata.markdown" }
 			}
 		}
 	}
