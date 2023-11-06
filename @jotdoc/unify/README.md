@@ -1,7 +1,7 @@
 
 # @jotdoc/unify  [![npm](https://img.shields.io/npm/v/%40jotdoc%2Funify?style=flat-square&logo=npm&label=%20&labelColor=white&color=%23eef)](https://www.npmjs.com/package/@jotdoc/unify) 
 
-Unifies `[]()` to work on text, images, and links! Arguments alone are how elements differentiate
+Unifies `[]()` to work on text, images, and links! Arguments alone are how elements differentiate   
 —for the [markdown-it](https://github.com/markdown-it/markdown-it) parser.
 
 
@@ -55,6 +55,7 @@ const md = require('markdown-it')()
 ### Options
 Define your own colors or override HTML defaults:
 ```js
+...
 const unify = require('@jotdoc/unify')
 md.use(unify))
 

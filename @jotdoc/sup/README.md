@@ -2,7 +2,7 @@
 # @jotdoc/sup  [![npm](https://img.shields.io/npm/v/%40jotdoc%2Fsup?style=flat-square&logo=npm&label=%20&labelColor=white&color=%23eef)](https://www.npmjs.com/package/@jotdoc/sup) 
 
 
-Whitespace-delimited (`<sup>`)erscripts for the [markdown-it](https://github.com/markdown-it/markdown-it) parser
+Whitespace-terminating (`<sup>`)erscripts for the [markdown-it](https://github.com/markdown-it/markdown-it) parser
 
 > ❗⠀This plugin belongs to a family of experimental features called **Jotdoc**: a  "flavor" of Markdown aiming to maximize readability and extend markup for common use cases where verbose HTML is required.
 >

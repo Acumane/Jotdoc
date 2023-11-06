@@ -22,7 +22,7 @@ Your rules take precedence!
 ### Enable
 
 ```js
-const md = require('markdown-it')()
+const md = require('markdown-it')({ typography: /* Boolean */ })
 
       md.use(require('@jotdoc/replace'), { /* OPTIONS */ })
 ```
@@ -31,6 +31,7 @@ const md = require('markdown-it')()
 
 Disable rules by name:
 ```js
+...
 const replace = require('@jotdoc/replace')
 md.use(replace), {larrow: false})
 ```

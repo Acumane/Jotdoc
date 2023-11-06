@@ -9,7 +9,7 @@ Format simple inline fractions ([markdown-it](https://github.com/markdown-it/mar
 > If you're interested, please do [share your thoughts](https://github.com/Acumane/jotdoc/discussions) and check out the [monorepo](https://github.com/Acumane/jotdoc)!
 
 ### Demo
-Up to 2 digits in the numerator/denominator:
+Up to 2 digits in the numerator/denominator:   
 <sub>(`·` = whitespace )</sub>
 <table style="width: 100%"><tr><td>
 
