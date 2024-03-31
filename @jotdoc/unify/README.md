@@ -41,7 +41,7 @@ Image sizes are attributes, too:
 `[Something](.embed/idk.png 60px)`
 
 </td><td >
-<img src="../../.embed/idk.jpg" width="60px"/>
+<img src="../../support/vscode/test/idk.jpg" width="60px"/>
 </td></tr></table>
 
 ### Enable

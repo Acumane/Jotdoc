@@ -16,7 +16,9 @@ HTML in Markdown deteriorates readability, yet a striking number of common use c
 
 ## ✨ Features
 
-<table style="width: 100%"><tr><td>
+![](.embed/demo.gif)
+
+<table><tr><td>
 
 - [**unify**](@jotdoc/unify/)⠀⠀⠀ ⠀⠀ ⠀⠀⠀Unifies `[]()` to work on text (colorize), images, and links
 - [**align**](@jotdoc/align)⠀⠀⠀⠀⠀⠀⠀⠀⠀Inline and block alignment (left, center, right)
@@ -26,10 +28,15 @@ HTML in Markdown deteriorates readability, yet a striking number of common use c
 - [**replace**](@jotdoc/replace)⠀⠀⠀⠀ ⠀⠀⠀Inline pattern substitutions
 </td></tr></table>
 
-⠀—and more are on the way! See [PLANS.md](PLANS.md) for what's to come (still workshopping)
+⠀—and more are on the way! See [PLANS](PLANS.md) for what's to come (still workshopping)
 ### Support
+<table><tr><td>
+
 - [**vscode**](support/vscode)
-  Extension imports Jotdoc plugins, contributes styles and syntax grammars, and exposes plugin options in settings
+  Extension imports Jotdoc plugins, contributes styles and syntax grammars, ㅤ
+  and exposes plugin options in settings
+</td></tr></table>
 
 
 ## 🔧 Setup
+This monorepo contains all Jotdoc plugins, documentation, and supporting extensions. It uses [pnpm workspaces](https://pnpm.io/workspaces)
