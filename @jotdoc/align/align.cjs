@@ -1,61 +1,55 @@
 'use strict'
 
 module.exports = function align_plugin(md) {
-  //                    after:      name:    function:
-  md.inline.ruler.after('emphasis', 'align', (state, silent) => {
-    let content,
-        token,
-        center = false,
-        max = state.posMax, // string length
-        start = state.pos,
-        first = state.src.charCodeAt(start)
+  md.block.ruler.before('blockquote', 'align', (state, startLine, lastLine) => {
+    const RE_OPEN = /^>(?![\s<]*$)/
+    const RE_CLOSE = /(?<=[^>\r\n])(>|<)$/
 
-    if (first !== 62) return false // >
-    if (silent) return false 
-    // not silent (validated), continue:
+    let pos = state.bMarks[startLine] + state.tShift[startLine],
+    max = state.eMarks[startLine]
 
-    state.pos = start + 1
+    if (state.sCount[startLine] - state.blkIndent >= 4) return false
+    // if (state.src.charCodeAt(pos) !== 62 /* > */) return false
+    let line = state.src.slice(pos, max)
+    if (!RE_OPEN.test(line)) return false
 
-    while (state.pos < max) { // find closing '>' or '<'
-      let cur = state.src.charCodeAt(state.pos)
-      if (cur === 62) { break }
-      if (cur === 60) { center = true; break }
-
-      state.pos++
+    let curLine = startLine,
+    content = [line.slice(1)], // Remove opening tag
+    foundClosing = RE_CLOSE.test(line)
+    
+    while (!foundClosing && curLine < lastLine - 1) {
+      curLine++
+      pos = state.bMarks[curLine] + state.tShift[curLine]
+      max = state.eMarks[curLine]
+      line = state.src.slice(pos, max)
+      if (line.trim() == '') return false
+      if (RE_CLOSE.test(line)) foundClosing = true
+      content.push(line)
     }
+    
+    if (!foundClosing) return false // No closing tag found
+    let closeTag = content[content.length - 1].slice(-1)
+    content[content.length - 1] = content[content.length - 1].slice(0, -1)
 
-    // no content
-    if (start + 1 === state.pos ) { 
-      state.pos = start
-      return false
-    }
+    let align = closeTag == '>' ? 'right' : 'center'
 
-    // found!
-    content = state.src.slice(start + 1, state.pos)
+    let token   = state.push(`${align}_open`, 'p', 1)
+    token.attrs = [["style", `text-align: ${align}`]]
+    token.block = true
 
-    // set scope to content
-    state.posMax = state.pos
-    state.pos = start + 1
+    content.forEach((line, index) => {
+      token          = state.push('inline', '', 0)
+      token.content  = line
+      token.map      = [startLine + index, startLine + index + 1]
+      token.children = []
+      token = state.push('newline', 'br', 0)
+    })
 
-    token           = state.push('div_open', 'div', 1)
-    if (center)
-      token.attrs   = [["style", "text-align: center"]]
-    else
-      token.attrs   = [["style", "text-align: right"]]
-    token.markup    = '>'
+    token       = state.push(`${align}_close`, 'p', -1)
+    token.block = true
 
-    token           = state.push('text', '', 0)
-    token.content   = content
+    state.line  = curLine + 1 // Move state beyond this content
 
-    token           = state.push('div_close', 'div', -1)
-    if (center)
-      token.markup  = '<'
-    else
-      token.markup  = '>'
-
-    // set scope to everything past content
-    state.pos = state.posMax + 1
-    state.posMax = max
     return true
   })
 }
