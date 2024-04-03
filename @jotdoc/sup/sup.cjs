@@ -14,8 +14,7 @@ module.exports = function sup_plugin(md) {
     if (state.src.charCodeAt(start+1) === 40) surround = true // ^(
     // Found '^' or '^(', continue:
     let open = surround ? 2 : 1
-    if (silent) return false 
-    // not silent (validated), continue:
+    if (silent) return true // can be a terminator 
     if (start + 2 + (surround ? 1 : 0) >= max) return false
     // String is long enough, continue...
 

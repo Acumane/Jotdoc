@@ -1,15 +1,14 @@
 'use strict'
 
 module.exports = function align_plugin(md) {
-  md.block.ruler.before('blockquote', 'align', (state, startLine, lastLine) => {
-    const RE_OPEN = /^>(?![\s<]*$)/
-    const RE_CLOSE = /(?<=[^>\r\n])(>|<)$/
+  const RE_OPEN = /^(>|<)(?![\s<]*$)/
+  const RE_CLOSE = /(?<=[^>\r\n])(>|<)$/
 
+  md.block.ruler.before('blockquote', 'align', (state, startLine, lastLine) => {
     let pos = state.bMarks[startLine] + state.tShift[startLine],
     max = state.eMarks[startLine]
 
     if (state.sCount[startLine] - state.blkIndent >= 4) return false
-    // if (state.src.charCodeAt(pos) !== 62 /* > */) return false
     let line = state.src.slice(pos, max)
     if (!RE_OPEN.test(line)) return false
 
@@ -48,8 +47,39 @@ module.exports = function align_plugin(md) {
     token       = state.push(`${align}_close`, 'p', -1)
     token.block = true
 
-    state.line  = curLine + 1 // Move state beyond this content
-
+    state.line  = curLine + 1 // Move state beyond content
     return true
+  })
+
+  md.core.ruler.push('title_align', (state) => {
+    state.tokens.forEach((token, index) => {
+      if (token.type == 'heading_open') {
+        let title = state.tokens[index + 1],
+        openTag, closeTag, align
+
+        if (title.type == 'inline') {
+          let opens = RE_OPEN.test(title.content),
+          closes = RE_CLOSE.test(title.content)
+
+          if (!opens && !closes) return false
+
+          openTag = opens ? title.content.match(RE_OPEN)[0] : ''
+          closeTag = closes ? title.content.match(RE_CLOSE)[0] : ''
+          title.content = title.content.replace(RE_OPEN,  '')
+                                       .replace(RE_CLOSE, '').trim()
+
+          if (openTag == closeTag) align = openTag == '>' ? 'right' : 'left'
+          else if (openTag && closeTag) align = 'center'
+          else align = (openTag + closeTag) == '>' ? 'right' : 'left'
+
+          token.attrs = token.attrs || []
+          token.attrs.push(['style', `text-align: ${align}`])
+
+          let t = title.children, t0 = t[0], tEnd = t[t.length-1]
+          t0.content = t0.content.replace(/^(>|<)/, '')
+          tEnd.content = tEnd.content.replace(/(>|<)$/, '')
+        }
+      }
+    })
   })
 }
