@@ -13,9 +13,9 @@ function classify(path) {
     return 'link'
   }
   catch(e){
-    if (Color(path).isValid()) return 'color'
     const match = userColor.find((c) => c.name === path)
     if (match) return 'ucolor'
+    if (Color(path).isValid()) return 'color'
     return 'image'
   }
 }
@@ -28,7 +28,7 @@ module.exports = (md) => {
         args, path = '',
         cEnd, found, content,
         type, token, nested,
-        pos,
+        pos, uColor, color,
         start = state.pos,
         max = state.posMax
 
@@ -45,10 +45,10 @@ module.exports = (md) => {
       while (pos < max) { // find closing ')'
         let cur = state.src.charCodeAt(pos)
         if (cur === 41) { found = true; break }
-  
+
         pos++
       }
-  
+
       if (!found) return false
 
       args = state.src.slice(cEnd + 2, pos)
@@ -66,16 +66,23 @@ module.exports = (md) => {
     if (!silent) {
       switch(type) {
         case 'link':
+          state.pos = start + 1;
+          state.posMax = cEnd;
+
           token         = state.push('link_open', 'a', 1)
-          token.attrs   = [ [ 'href', path ] ]
-    
+          token.attrs   = attrs = [ [ 'href', path ] ]
+
           state.linkLevel++
-          token         = state.push('text', '', 0)
-          token.content = content 
+          state.md.inline.tokenize(state) // tokenize content + nested
           state.linkLevel--
           token         = state.push('link_close', 'a', -1)
+
+          uColor = userColor.find((c) => c.name === attr)
+          color  = uColor ? uColor.color : (Color(attr).isValid() ? attr : false)
+          if (color)
+            attrs.push([ 'style', `color:${color}` ])
           break
-    
+
         case 'image':
           state.md.inline.parse(content, state.md, state.env, nested = [])
 
@@ -92,19 +99,20 @@ module.exports = (md) => {
 
         case 'ucolor':
         case 'color':
-          const color = (type === 'ucolor') ? userColor.find((c) => c.name === path).color : path
-          token         = state.push('span_open', 'span', 1)
-          token.attrs   = [ [ 'style', `color:${color}` ] ]
-          token         = state.push('text', '', 0)
-          token.content = content 
-          token         = state.push('span_close', 'span', -1)
+          state.pos = start + 1;
+          state.posMax = cEnd;
+          color = (type === 'ucolor') ? userColor.find((c) => c.name === path).color : path
+
+          token          = state.push('span_open', 'span', 1)
+          token.attrs    = [ [ 'style', `color:${color}` ] ]
+          state.md.inline.tokenize(state) // tokenize content + nested
+          token          = state.push('span_close', 'span', -1)
           break
       }
     }
 
     state.pos = pos + 1
     return true
-  
   })
 }
 
