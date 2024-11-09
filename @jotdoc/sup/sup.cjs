@@ -1,8 +1,8 @@
-'use strict'
+"use strict"
 
 module.exports = function sup_plugin(md) {
   //                    after:      name:  function:
-  md.inline.ruler.after('emphasis', 'sup', (state, silent) => {
+  md.inline.ruler.after("emphasis", "sup", (state, silent) => {
     let found,
         content,
         token,
@@ -11,10 +11,10 @@ module.exports = function sup_plugin(md) {
         start = state.pos
 
     if (state.src.charCodeAt(start) !== 94) return false // ^
-    if (state.src.charCodeAt(start+1) === 40) surround = true // ^(
+    if (state.src.charCodeAt(start + 1) === 40) surround = true // ^(
     // Found '^' or '^(', continue:
     let open = surround ? 2 : 1
-    if (silent) return true // can be a terminator 
+    if (silent) return true // can be a terminator
     if (start + 2 + (surround ? 1 : 0) >= max) return false
     // String is long enough, continue...
 
@@ -29,7 +29,7 @@ module.exports = function sup_plugin(md) {
     }
 
     // !found or no content
-    if (!found || start + open === state.pos ) { 
+    if (!found || start + open === state.pos) {
       state.pos = start
       return false
     }
@@ -41,17 +41,17 @@ module.exports = function sup_plugin(md) {
     state.posMax = state.pos
     state.pos = start + open
 
-    token         = state.push('sup_open', 'sup', 1)
-    token.markup  = '^'
+    token = state.push("sup_open", "sup", 1)
+    token.markup = "^"
 
-    token         = state.push('text', '', 0)
+    token = state.push("text", "", 0)
     token.content = content
 
-    token         = state.push('sup_close', 'sup', -1)
-    if (surround)   token.markup  = ')'
-    if (!surround)  {
-    token         = state.push('text', '', 0)
-    token.content = ' '
+    token = state.push("sup_close", "sup", -1)
+    if (surround) token.markup = ")"
+    if (!surround) {
+      token = state.push("text", "", 0)
+      token.content = " "
     }
 
     // set scope to everything past content

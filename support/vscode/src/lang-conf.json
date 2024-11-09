@@ -1,13 +1,11 @@
 {
 	"comments": {
-	  "lineComment": "%"
+		"lineComment": "%"
 	},
-	"autoClosingPairs": [
-	  { "open": "$", "close": "$" }
-	],
+	"autoClosingPairs": [{ "open": "$", "close": "$" }],
 	"surroundingPairs": [
-	  ["$", "$"],
-	  ["^", "^"],
-	  ["~", "~"]
+		["$", "$"],
+		["^", "^"],
+		["~", "~"]
 	]
 }

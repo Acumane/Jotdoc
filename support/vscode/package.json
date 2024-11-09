@@ -1,94 +1,98 @@
 {
-  "name": "jotdoc",
-  "displayName": "Jotdoc",
-  "description": "A more capable, legible Markdown",
-  "version": "0.0.1",
-  "engines": {
-    "vscode": "^1.82.2"
-  },
-  "categories": [
-    "Programming Languages",
-    "Formatters",
-    "Other"
-  ],
-  "keywords": [
-    "markdown",
-    "markdown-it"
-  ],
-  "activationEvents": [],
-  "main": "./src/extension.js",
-  "contributes": {
-    "markdown.markdownItPlugins": true,
-    "markdown.previewStyles": [
-      "./src/style.css"
-    ],
-    "languages": [
-      {
-        "id": "markdown",
-        "extensions": [ ".md" ],
-        "configuration": "./src/lang-conf.json"
-      }
-    ],
-    "grammars": [
-      {
-        "scopeName": "jotdoc.inject",
-        "injectTo": ["text.html.markdown"],
-        "path": "./src/syntax.tm.json"
-      }
-    ],
-    "configuration": {
-      "title": "Jotdoc",
-      "properties": {
-        "jotdoc.disabledFeatures": {
-          "type": "string",
-          "default": "",
-          "description": "Comma + space-sepearted string of features you'd like to disable\n(Restart required)"
-        },
-        "jotdoc.replace.disabledRules": {
-          "type": "string",
-          "default": "",
-          "description": "Comma + space-sepearted string of replace rules you'd like to disable"
-        },
-        "jotdoc.replace.userRules": {
-          "type": "array",
-          "default": [],
-          "description": "Specify object w/ a (name), regex pattern (re), and replacement (sub)"
-        },
-        "jotdoc.unify.userColors": {
-          "type": "array",
-          "default": [],
-          "description": "Specify object w/ a (name) and hex code (color)"
-        }
-      }
-    },
-    "commands": {
-      "command": "jotdoc.helloWorld",
-      "title": "Hello World"
-    }
-  },
-  "scripts": {
-    "lint": "eslint .",
-    "pretest": "pnpm run lint",
-    "test": "node ./test/runTest.js"
-  },
-  "devDependencies": {
-    "@types/mocha": "^10.0.2",
-    "@types/node": "~18.18.4",
-    "@types/vscode": "^1.83.0",
-    "@vscode/test-electron": "^2.3.5",
-    "eslint": "^8.51.0",
-    "glob": "^10.3.10",
-    "mocha": "^10.2.0",
-    "typescript": "^5.2.2"
-  },
-  "dependencies": {
-    "@jotdoc/align": "workspace:*",
-    "@jotdoc/comments": "workspace:*",
-    "@jotdoc/fracs": "workspace:*",
-    "@jotdoc/replace": "workspace:*",
-    "@jotdoc/sub": "workspace:*",
-    "@jotdoc/sup": "workspace:*",
-    "@jotdoc/unify": "workspace:*",
-    "tinycolor2": "^1.6.0"
-  }
+	"name": "jotdoc",
+	"displayName": "Jotdoc",
+	"description": "A more capable, legible Markdown",
+	"version": "0.0.1",
+	"engines": {
+		"vscode": "^1.82.2"
+	},
+	"categories": [
+		"Programming Languages",
+		"Formatters",
+		"Other"
+	],
+	"keywords": [
+		"markdown",
+		"markdown-it"
+	],
+	"activationEvents": [],
+	"main": "./src/extension.js",
+	"contributes": {
+		"markdown.markdownItPlugins": true,
+		"markdown.previewStyles": [
+			"./src/style.css"
+		],
+		"languages": [
+			{
+				"id": "markdown",
+				"extensions": [
+					".md"
+				],
+				"configuration": "./src/lang-conf.json"
+			}
+		],
+		"grammars": [
+			{
+				"scopeName": "jotdoc.inject",
+				"injectTo": [
+					"text.html.markdown"
+				],
+				"path": "./src/syntax.tm.json"
+			}
+		],
+		"configuration": {
+			"title": "Jotdoc",
+			"properties": {
+				"jotdoc.disabledFeatures": {
+					"type": "string",
+					"default": "sup, sub",
+					"description": "Comma + space-sepearted string of features you'd like to disable\n(Restart required)"
+				},
+				"jotdoc.replace.disabledRules": {
+					"type": "string",
+					"default": "",
+					"description": "Comma + space-sepearted string of replace rules you'd like to disable"
+				},
+				"jotdoc.replace.userRules": {
+					"type": "array",
+					"default": [],
+					"description": "Specify object w/ a (name), regex pattern (re), and replacement (sub)"
+				},
+				"jotdoc.unify.userColors": {
+					"type": "array",
+					"default": [],
+					"description": "Specify object w/ a (name) and hex code (color)"
+				}
+			}
+		},
+		"commands": {
+			"command": "jotdoc.helloWorld",
+			"title": "Hello World"
+		}
+	},
+	"scripts": {
+		"lint": "eslint .",
+		"pretest": "pnpm run lint",
+		"test": "node ./test/runTest.js"
+	},
+	"devDependencies": {
+		"@types/mocha": "^10.0.2",
+		"@types/node": "~18.18.4",
+		"@types/vscode": "^1.83.0",
+		"@vscode/test-electron": "^2.3.5",
+		"eslint": "^8.51.0",
+		"glob": "^10.3.10",
+		"mocha": "^10.2.0",
+		"typescript": "^5.2.2"
+	},
+	"dependencies": {
+		"@jotdoc/align": "workspace:*",
+		"@jotdoc/comments": "workspace:*",
+		"@jotdoc/fracs": "workspace:*",
+		"@jotdoc/replace": "workspace:*",
+		"@jotdoc/sub": "workspace:*",
+		"@jotdoc/sup": "workspace:*",
+		"@jotdoc/unify": "workspace:*",
+		"tinycolor2": "^1.6.0"
+	}
 }

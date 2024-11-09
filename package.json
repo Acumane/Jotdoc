@@ -1,18 +1,26 @@
 {
-  "name": "jotdoc",
-  "version": "0.0.0",
-  "description": "A more capable, legible Markdown",
-  "keywords": [
-    "markdown"
-  ],
-  "author": "",
-  "license": "GPL-3.0",
+	"name": "jotdoc",
+	"version": "0.0.0",
+	"description": "A more capable, legible Markdown",
+	"keywords": [
+		"markdown"
+	],
+	"author": "",
+	"license": "GPL-3.0",
+	"main": "index.js",
+	"type": "module",
+	"prettier": {
+		"printWidth": 100,
+		"semi": false,
+		"singleQuote": false,
+		"arrowParens":"avoid",	
+		"trailingComma": "none",
+		"//": "JSON: tabs (4)"
 
-  "main": "index.js",
-  "type": "module",
-  "scripts": {
-    "pub": "publish --access=public",
-    "init": "init --scope=jotdoc && pnpm pkg set type='module'"
-  },
-  "dependencies": {}
+	},
+	"scripts": {
+		"pub": "publish --access=public",
+		"init": "init --scope=jotdoc && pnpm pkg set type='module'"
+	},
+	"dependencies": {}
 }

@@ -14,7 +14,6 @@
 				"--disable-extension",
 				"jebbs.markdown-extended",
 				"${workspaceFolder}/support/vscode/test"
-
 			]
 		},
 		{
