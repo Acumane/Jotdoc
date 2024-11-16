@@ -16,7 +16,6 @@
 		"arrowParens":"avoid",	
 		"trailingComma": "none",
 		"//": "JSON: tabs (4)"
-
 	},
 	"scripts": {
 		"pub": "publish --access=public",

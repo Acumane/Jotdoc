@@ -88,6 +88,7 @@
 	"dependencies": {
 		"@jotdoc/align": "workspace:*",
 		"@jotdoc/comments": "workspace:*",
+		"@jotdoc/columns": "workspace:*",
 		"@jotdoc/fracs": "workspace:*",
 		"@jotdoc/replace": "workspace:*",
 		"@jotdoc/sub": "workspace:*",
