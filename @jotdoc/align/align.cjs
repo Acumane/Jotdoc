@@ -46,7 +46,6 @@ module.exports = function align_plugin(md) {
       token.content = line
       token.map = [startLine + index, startLine + index + 1]
       token.children = []
-      token = state.push("newline", "br", 0)
     })
 
     token = state.push(`${align}_close`, "p", -1)

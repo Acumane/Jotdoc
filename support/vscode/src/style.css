@@ -1,15 +1,11 @@
-h1 {
-	text-align: center;
+img {
+	vertical-align: middle;
+	padding: 0 0.5em;
+	margin: auto;
 }
 
 h1, h2, h3, h4 {
 	font-weight: bold;
-}
-
-img {
-	margin: auto;
-	display: block;
-	padding: 1em;
 }
 
 ul, ol, dl {
