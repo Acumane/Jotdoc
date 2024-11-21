@@ -33,25 +33,39 @@ module.exports = function align_plugin(md) {
     if (openTag[1] == "<" && closeTag[1] == ">") return false
 
     content[content.length - 1] = content[content.length - 1].slice(0, -1)
-
     let align = openTag[1] == closeTag[1] ? 
                 (openTag[1] == ">" ? "right" : "left") : "center"
 
-    let token = state.push(`${align}_open`, "p", 1)
-    token.attrs = [["style", `text-align: ${align}`]]
-    token.block = true
+    let wrapper = state.push("div_open", "div", 1)
+    wrapper.attrs = [["style", "position: relative; margin: 1em 0"]]
+
+    let container = state.push("div_open", "div", 1)
+    container.attrs = [
+      ["style", align === "center" ? "text-align: center" : `float: ${align}; margin: 0 1em 0.5em`]
+    ]
 
     content.forEach((line, index) => {
-      token = state.push("inline", "", 0)
+      let token = state.push("inline", "", 0)
       token.content = line
       token.map = [startLine + index, startLine + index + 1]
       token.children = []
     })
+    state.push("div_close", "div", -1)
 
-    token = state.push(`${align}_close`, "p", -1)
-    token.block = true
+    // Add following lines until empty line:
+    for (let nextLine = curLine + 1; nextLine < lastLine; nextLine++) {
+      pos = state.bMarks[nextLine] + state.tShift[nextLine]
+      max = state.eMarks[nextLine]
+      line = state.src.slice(pos, max)
+      if (!line.trim()) break
+      let token = state.push("inline", "", 0)
+      token.content = line
+      token.children = []
+      curLine = nextLine
+    }
 
-    state.line = curLine + 1 // Move state beyond content
+    state.push("div_close", "div", -1)
+    state.line = curLine + 1
     return true
   })
 
