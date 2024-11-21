@@ -57,7 +57,7 @@ module.exports = function columns_plugin(md) {
 
     // Create table structure
     let table = state.push("table_open", "table", 1)
-    table.attrs = [["style", "width: 100%"]]
+    table.attrs = [["style", "width: 100%; table-layout: fixed"]]
 
     let tr = state.push("tr_open", "tr", 1)
     tr.attrs = [["style", "border: none"]]
@@ -65,13 +65,15 @@ module.exports = function columns_plugin(md) {
     // Process columns
     cols
       .filter(col => col.length)
-      .forEach((col, i) => {
+      .forEach((col, i, arr) => {
         let td = state.push("td_open", "td", 1)
         td.attrs = [
           [
             "style",
             `border: none; vertical-align: top${
-              i < cols.length - 1 ? "; border-right: solid 1px #ccc" : ""
+              i < arr.length - 1
+                ? "; padding-right: 1em; border-right: solid 1px rgba(127, 127, 127, 0.3)"
+                : ""
             }`
           ]
         ]
