@@ -46,12 +46,12 @@
 				"jotdoc.disabledFeatures": {
 					"type": "string",
 					"default": "sup, sub",
-					"description": "Comma + space-sepearted string of features you'd like to disable\n(Restart required)"
+					"description": "Comma + space-separated string of features you'd like to disable\n(Restart required)"
 				},
 				"jotdoc.replace.disabledRules": {
 					"type": "string",
 					"default": "",
-					"description": "Comma + space-sepearted string of replace rules you'd like to disable"
+					"description": "Comma + space-separated string of replace rules you'd like to disable"
 				},
 				"jotdoc.replace.userRules": {
 					"type": "array",
@@ -93,6 +93,7 @@
 		"@jotdoc/replace": "workspace:*",
 		"@jotdoc/sub": "workspace:*",
 		"@jotdoc/sup": "workspace:*",
+		"@jotdoc/break": "workspace:*",
 		"@jotdoc/unify": "workspace:*",
 		"tinycolor2": "^1.6.0"
 	}
