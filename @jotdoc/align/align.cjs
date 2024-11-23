@@ -41,7 +41,12 @@ module.exports = function align_plugin(md) {
 
     let container = state.push("div_open", "div", 1)
     container.attrs = [
-      ["style", align === "center" ? "text-align: center" : `float: ${align}; margin: 0 1em 0.5em`]
+      [
+        "style",
+        align === "center"
+          ? "text-align: center"
+          : `float: ${align}; margin: 0 1em 0.5em; text-align: ${align}`
+      ]
     ]
 
     content.forEach((line, index) => {
@@ -82,7 +87,6 @@ module.exports = function align_plugin(md) {
         if (openTag[1] == "<" && closeTag[1] == ">") return false
 
         title.content = title.content.replace(RE_OPEN, "").replace(RE_CLOSE, "").trim()
-
         let align = openTag[1] == closeTag[1] ? 
                    (openTag[1] == ">" ? "right" : "left") : "center"
 
