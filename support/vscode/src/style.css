@@ -4,6 +4,12 @@ img {
 	height: auto;
 }
 
+figcaption {
+	margin-top: 0.4em;
+	font-size: 0.9em;
+	color: #808080;
+}
+
 h1 {
 	text-align: center;
 }
