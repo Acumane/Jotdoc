@@ -1,13 +1,21 @@
 img {
 	vertical-align: middle;
 	max-width: 100%;
-	height: auto;
 }
 
-figcaption {
+.img-container {
+	display: inline-flex;
+	flex-direction: column;
+}
+
+.img-caption {
 	margin-top: 0.4em;
 	font-size: 0.9em;
 	color: #808080;
+	text-align: center;
+	/* wrap @ image width: */
+	min-width: 100%;
+	width: 0;
 }
 
 h1 {

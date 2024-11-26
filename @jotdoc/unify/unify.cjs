@@ -58,7 +58,7 @@ module.exports = md => {
           token = state.push("link_open", "a", 1)
           token.attrs = attrs = [["href", path]]
           state.linkLevel++
-          state.md.inline.tokenize(state) // tokenize content + nested
+          state.md.inline.tokenize(state) // parse nested content
           state.linkLevel--
           token = state.push("link_close", "a", -1)
           uColor = userColor.find(c => c.name === attr)
@@ -83,7 +83,15 @@ module.exports = md => {
 
           if (content.trim()) {
             token = state.push("html_inline", "", 0)
-            token.content = '</span><span class="img-caption">' + content + "</span></span>"
+            token.content = '</span><span class="img-caption">'
+
+            let { src, pos, posMax } = state
+            Object.assign(state, { src: content, pos: 0, posMax: content.length })
+            state.md.inline.tokenize(state) // parse nested content
+            Object.assign(state, { src, pos, posMax })
+
+            token = state.push("html_inline", "", 0)
+            token.content = "</span></span>"
           }
           break
 
@@ -94,7 +102,7 @@ module.exports = md => {
           color = type === "ucolor" ? userColor.find(c => c.name === path).color : path
           token = state.push("span_open", "span", 1)
           token.attrs = [["style", `color:${color}`]]
-          state.md.inline.tokenize(state) // tokenize content + nested
+          state.md.inline.tokenize(state) // parse nested content
           token = state.push("span_close", "span", -1)
           break
       }
