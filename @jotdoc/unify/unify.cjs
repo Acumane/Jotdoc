@@ -7,6 +7,12 @@ let userColor = []
 const WIDTH = /^\d+(?:px|%)?$/i,
       DIM = /^\d+x\d+(?:px)?$/i
 
+const STYLES = `<style>
+img { vertical-align:middle; max-width:100%; }
+.img-container { display:inline-flex; flex-direction:column; }
+.img-caption { min-width:100%; width:0; text-align:center; }
+</style>`
+
 function classify(path) {
   try {
     Boolean(new URL(path))
@@ -20,6 +26,14 @@ function classify(path) {
 }
 
 module.exports = md => {
+  md.core.ruler.push("img_style", state => { // insert @ start of doc
+    if (state.tokens.length && state.tokens[0].type === "paragraph_open") {
+      let token = new state.Token("html_block", "", 0)
+      token.content = STYLES
+      state.tokens.unshift(token)
+    }
+  })
+
   md.inline.ruler.disable(["image", "link"]) // replace with:
   md.inline.ruler.push("unify", (state, silent) => {
 
