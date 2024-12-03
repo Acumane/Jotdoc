@@ -87,13 +87,13 @@
 	},
 	"dependencies": {
 		"@jotdoc/align": "workspace:*",
-		"@jotdoc/comments": "workspace:*",
+		"@jotdoc/break": "workspace:*",
 		"@jotdoc/columns": "workspace:*",
+		"@jotdoc/comments": "workspace:*",
 		"@jotdoc/replace": "workspace:*",
+		"@jotdoc/skew": "workspace:*",
 		"@jotdoc/sub": "workspace:*",
 		"@jotdoc/sup": "workspace:*",
-		"@jotdoc/skew": "workspace:*",
-		"@jotdoc/break": "workspace:*",
 		"@jotdoc/unify": "workspace:*",
 		"tinycolor2": "^1.6.0"
 	}

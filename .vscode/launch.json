@@ -13,6 +13,7 @@
 				"--extensionDevelopmentPath=${workspaceFolder}/support/vscode",
 				"--disable-extension",
 				"jebbs.markdown-extended",
+				"--profile", "Notes",
 				"${workspaceFolder}/support/vscode/test"
 			]
 		},
