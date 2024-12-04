@@ -26,12 +26,10 @@ function classify(path) {
 }
 
 module.exports = md => {
-  md.core.ruler.push("img_style", state => { // insert @ start of doc
-    if (state.tokens.length && state.tokens[0].type === "paragraph_open") {
-      let token = new state.Token("html_block", "", 0)
-      token.content = STYLES
-      state.tokens.unshift(token)
-    }
+  md.core.ruler.after("inline", "img_style", state => {
+    let token = new state.Token("html_block", "", 0)
+    token.content = STYLES
+    state.tokens.unshift(token)
   })
 
   md.inline.ruler.disable(["image", "link"]) // replace with:
