@@ -1,7 +1,7 @@
 {
 	"name": "@jotdoc/columns",
-	"version": "0.1.0",
-	"description": "",
+	"version": "1.0.3",
+	"description": "Column blocks for Markdown",
 	"keywords": [
 		"markdown-it-plugin",
 		"markdown-it",
@@ -11,7 +11,7 @@
 		"cols",
 		"col"
 	],
-	"author": "",
+	"author": "Bren",
 	"license": "GPL-3.0",
 	"repository": {
 		"type": "git",

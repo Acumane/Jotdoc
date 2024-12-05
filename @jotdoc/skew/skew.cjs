@@ -4,7 +4,7 @@ function isFraction(str) {
 }
 
 module.exports = md => {
-  md.core.ruler.push("fracs", state => {
+  md.core.ruler.push("skew", state => {
     function processToken(token) {
       if (token.type !== "text") return // only text tokens:
 

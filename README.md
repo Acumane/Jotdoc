@@ -35,7 +35,7 @@ HTML in Markdown deteriorates readability, yet a striking number of common use c
 
 - Line break/escape from image wrapping ⠀[<sup>`break` 🡭</sup>](@jotdoc/break/README.md)⠀
 
-- Skew simple fractions like⠀<sup>□ </sup>⁄<sub> □</sub> ⠀[<sup>`fracs` 🡭</sup>](@jotdoc/fracs/README.md)⠀
+- Skew simple fractions like⠀<sup>□ </sup>⁄<sub> □</sub> ⠀[<sup>`skew` 🡭</sup>](@jotdoc/skew/README.md)⠀
 
 
 

@@ -72,7 +72,7 @@ let features = [
   ["align", {}, null],
   ["replace", reOpts(), replace],
   ["columns", {}, null],
-  ["fracs", {}, null],
+  ["skew", {}, null],
   ["break", {}, null],
   ["comments", {}, null],
   ["unify", {}, unify]

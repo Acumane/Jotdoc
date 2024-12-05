@@ -1,7 +1,7 @@
 {
 	"name": "@jotdoc/sup",
-	"version": "0.1.0",
-	"description": "",
+	"version": "0.1.1",
+	"description": "Experimental superscripts for Markdown",
 	"keywords": [
 		"markdown-it-plugin",
 		"markdown-it",
@@ -10,7 +10,7 @@
 		"sup",
 		"superscript"
 	],
-	"author": "",
+	"author": "Bren",
 	"license": "GPL-3.0",
 	"repository": {
 		"type": "git",

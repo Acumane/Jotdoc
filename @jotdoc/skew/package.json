@@ -1,19 +1,15 @@
 {
-	"name": "@jotdoc/unify",
-	"version": "1.2.3",
-	"description": "Use []() on images & text: set links, colors, image size, etc. in Markdown",
+	"name": "@jotdoc/skew",
+	"version": "1.0.0",
+	"description": "Skew simple fractions in Markdown",
 	"keywords": [
 		"markdown-it-plugin",
 		"markdown-it",
 		"markdown",
 		"jotdoc",
-		"unify",
-		"text",
-		"image",
-		"link",
-		"attr",
-		"size",
-		"color"
+		"skew",
+		"fraction",
+		"frac"
 	],
 	"author": "Bren",
 	"license": "GPL-3.0",
@@ -21,13 +17,10 @@
 		"type": "git",
 		"url": "https://github.com/Acumane/jotdoc.git"
 	},
-	"main": "unify.cjs",
+	"main": "skew.cjs",
 	"type": "module",
 	"scripts": {
 		"pub": "publish --access=public",
 		"init": "init --scope=jotdoc && pnpm pkg set type='module'"
-	},
-	"dependencies": {
-		"tinycolor2": "^1.6.0"
 	}
 }

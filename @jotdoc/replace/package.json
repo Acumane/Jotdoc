@@ -1,17 +1,18 @@
 {
 	"name": "@jotdoc/replace",
-	"version": "0.1.0",
-	"description": "",
+	"version": "1.0.0",
+	"description": "User-defined pattern substitutions for Markdown",
 	"keywords": [
 		"markdown-it-plugin",
 		"markdown-it",
 		"markdown",
 		"jotdoc",
 		"replace",
-		"replacements",
-		"typographer"
+		"replacement",
+		"typographer",
+		"substitution"
 	],
-	"author": "",
+	"author": "Bren",
 	"license": "GPL-3.0",
 	"repository": {
 		"type": "git",

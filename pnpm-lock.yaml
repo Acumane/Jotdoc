@@ -16,7 +16,7 @@ importers:
 
   '@jotdoc/comments': {}
 
-  '@jotdoc/fracs': {}
+  '@jotdoc/skew': {}
 
   '@jotdoc/replace': {}
 
@@ -45,9 +45,9 @@ importers:
       '@jotdoc/comments':
         specifier: workspace:*
         version: link:../../@jotdoc/comments
-      '@jotdoc/fracs':
+      '@jotdoc/skew':
         specifier: workspace:*
-        version: link:../../@jotdoc/fracs
+        version: link:../../@jotdoc/skew
       '@jotdoc/replace':
         specifier: workspace:*
         version: link:../../@jotdoc/replace

@@ -1,22 +1,21 @@
 {
-	"name": "@jotdoc/fracs",
-	"version": "0.1.0",
-	"description": "",
+	"name": "@jotdoc/break",
+	"version": "1.0.0",
+	"description": "Line/wrap break for Markdown",
 	"keywords": [
 		"markdown-it-plugin",
 		"markdown-it",
 		"markdown",
 		"jotdoc",
-		"fractions",
-		"frac"
+		"break"
 	],
-	"author": "",
+	"author": "Bren",
 	"license": "GPL-3.0",
 	"repository": {
 		"type": "git",
 		"url": "https://github.com/Acumane/jotdoc.git"
 	},
-	"main": "fracs.cjs",
+	"main": "break.cjs",
 	"type": "module",
 	"scripts": {
 		"pub": "publish --access=public",

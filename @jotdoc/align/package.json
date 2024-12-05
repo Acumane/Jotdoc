@@ -1,15 +1,16 @@
 {
 	"name": "@jotdoc/align",
-	"version": "0.1.0",
-	"description": "",
+	"version": "1.1.1",
+	"description": "Alignment (left, center, right) & image wrap for Markdown",
 	"keywords": [
 		"markdown-it-plugin",
 		"markdown-it",
 		"markdown",
 		"jotdoc",
-		"align"
+		"align",
+		"wrap"
 	],
-	"author": "",
+	"author": "Bren",
 	"license": "GPL-3.0",
 	"repository": {
 		"type": "git",
